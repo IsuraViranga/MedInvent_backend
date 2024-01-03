@@ -1,6 +1,6 @@
 const searchDoctor = require("../usecases/search/searchDoctor");
-const searchDoctor = require("../usecases/search/searchMedicine");
-const searchDoctor = require("../usecases/search/searchPharmacy");
+//const searchDoctor = require("../usecases/search/searchMedicine");
+//const searchDoctor = require("../usecases/search/searchPharmacy");
 
 class SearchController {
     static async searchDoctor(req, res) {
@@ -13,5 +13,6 @@ class SearchController {
           res.status(500).json({ error: 'Internal Server Error' });
         }
       }
+      
 }
 module.exports=SearchController;

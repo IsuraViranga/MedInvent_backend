@@ -1,3 +1,4 @@
+/*
 const{ Router } =require("express");
 const router = Router();
 const ViewController = require("../controller/viewController");
@@ -13,3 +14,5 @@ router.get('/appoinment/depend/:id',ViewController.getDependPrescription);
 
 
 module.exports=router;
+*/
+

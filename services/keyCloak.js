@@ -1,64 +1,40 @@
-const express = require('express');
-const session = require('express-session');
-const Keycloak = require('keycloak-connect');
+var session = require('express-session');
+var Keycloak = require('keycloak-connect');
 
-const app = express();
+let _keycloak;
 
-// Session configuration
-app.use(
-  session({
-    secret: 'your-secret-key',
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+var keycloakConfig = {
+    clientId: 'med-client',
+    bearerOnly: true,
+    serverUrl: 'http://localhost:8080',
+    realm: 'medinventRealm',
+    realmPublicKey: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs3VM0SMtKggJxYPXBj/gjrJpzUYJwDM9/J1bqlN7zJ/wNT/RgdSi9uqMc9sjGaJlGPh1JG4d4vFf/QGREQlYygG28w7AxEwLSTWdZgzJx4a7sNhaiWXQ/QfWK/yHol0J5UZ8BhggZUe5orobrg/EB7+6UttrRBZ3SQlOsvR36VE/DPFbiqlrw44RyrMuimD57DizrI5z71053MOX9C5vhYFSgnN8Lwb4ZJTP72sQr/bgQjQ/c39J9ysRI22KsZWyA91+Q6N/vKkNY8RPvxpqtVKyTqFkosAPOOyOzXflFuQy0cfQslerYLeMln56dhyC2zJ42mVNG3twFg33VQoNAwIDAQAB'
+    /*credentials: {
+        secret: 'XqKCPCiAn9T1QrCa5ya358bFEb45kNOa'
+    }*/
+};
 
-// Keycloak configuration
-const keycloak = new Keycloak({
-  store: memoryStore(), // You can use a different store based on your setup
-  scope: 'openid',
-  clientId: 'medClient',
-  bearerOnly: true,
-  serverUrl: 'https://localhost/8080/',
-  realm: 'medinventRealm',
-});
-
-app.use(keycloak.middleware());
-
-function memoryStore() {
-  let users = {};
-  return {
-    get: (key, callback) => callback(null, users[key]),
-    set: (key, value, callback) => {
-      users[key] = value;
-      callback(null, value);
-    },
-    destroy: (key, callback) => {
-      delete users[key];
-      callback();
-    },
-  };
+function initKeycloak() {
+    if (_keycloak) {
+        console.warn("Trying to init Keycloak again!");
+        return _keycloak;
+    } 
+    else {
+        console.log("Initializing Keycloak...");
+        var memoryStore = new session.MemoryStore();
+        _keycloak = new Keycloak({ store: memoryStore }, keycloakConfig);
+        return _keycloak;
+    }
 }
 
-/*
-const Keycloak = require('keycloak-connect')
-const session = require('express-session')
-
-const initKeycloak = (app) => {
-  const memoryStore = new session.MemoryStore()
-  const keycloak = new Keycloak({ store: memoryStore })
-  // session
-  app.use(session({
-    secret: 'BeALongSecret',
-    resave: false,
-    saveUninitialized: true,
-    store: memoryStore
-  }))
-
-  app.use(keycloak.middleware())
-
-  return keycloak
+function getKeycloak() {
+    if (!_keycloak){
+        console.error('Keycloak has not been initialized. Please called init first.');
+    } 
+    return _keycloak;
 }
 
-module.exports = initKeycloak
-*/
+module.exports = {
+    initKeycloak,
+    getKeycloak,
+};

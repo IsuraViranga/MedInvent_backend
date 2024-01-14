@@ -4,6 +4,10 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
+//keyCloak related 
+const keycloak = require('./services/keyCloak').initKeycloak();
+app.use(keycloak.middleware());
+
 //import route files
 const searchRoutes = require('./routes/searchroutes');
 //const editRoutes =require('./routes/editRoutes');

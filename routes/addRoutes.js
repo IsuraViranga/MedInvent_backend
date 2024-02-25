@@ -9,7 +9,7 @@ router.post('/profile/owner',AddController.addOwnerProfile);
 //add new prescription related data
 //router.post('/prescription/medicine',AddController.addMedicine);
 //router.post('/prescription/ordDetail',AddController.addOrderDetail);
-//router.post('/prescription',AddController.addPrescription);
+router.post('/prescription/Manual',AddController.addPrescriptionManual);
 
 //add new appoinment related data
 //router.post('/appoinment/owner',AddController.addOwnerAppoinment);

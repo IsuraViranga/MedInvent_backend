@@ -8,6 +8,7 @@ class AuthenticateController {
           const addResult = await AuthWithEmailCredentials.authWithEmailPassword(getbody);
          // res.status(200).json(addResult);
           //const { access_token, refresh_token, expires_in } = JSON.parse(addResult);
+          console.log("done");
           res.status(200).json(addResult);
         } catch (error) {
           console.error('Error:', error.message);

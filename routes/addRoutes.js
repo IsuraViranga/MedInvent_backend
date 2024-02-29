@@ -4,7 +4,7 @@ const AddController = require("../controller/addController");
 
 //add new profiles
 router.post('/profile/owner',AddController.addOwnerProfile);
-//router.post('/profile/depend',AddController.addDependentProfile);
+router.post('/profile/depend',AddController.addDependentProfile);
 
 //add new prescription related data
 //router.post('/prescription/medicine',AddController.addMedicine);

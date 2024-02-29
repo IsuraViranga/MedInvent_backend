@@ -10,14 +10,14 @@ app.use(express.json());
 
 //import route files
 const searchRoutes = require('./routes/searchroutes');
-//const editRoutes =require('./routes/editRoutes');
+const editRoutes =require('./routes/editRoutes');
 const addRoutes =require('./routes/addRoutes');
 const viewRoutes =require('./routes/viewRoutes');
 const authenticateRoutes =require('./routes/authenticateRoutes');
 
-// Routes localhost:3000....
+// Routes localhost:3000....    
 app.use('/api/search',searchRoutes);
-//app.use('/api/edit',editRoutes);
+app.use('/api/edit',editRoutes);
 app.use('/api/add/new',addRoutes);   
 app.use('/api/view',viewRoutes);
 app.use('/api/auth',authenticateRoutes);

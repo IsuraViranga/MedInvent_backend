@@ -22,8 +22,13 @@ const getOwnerdetailsByID=`SELECT * FROM PatientUser WHERE userID=$1`;
 
 const getDependDetailsByID=`SELECT * FROM DependMember WHERE userID=$1 AND dID=$2`;
 
+const getClinics="SELECT clinicName FROM Sessions";
+
+const getDoctors="SELECT Fname,Lname FROM Doctor";
+
+const getSpecializations ="SELECT specialization FROM Doctor";
 
 
 module.exports={
-    getDependsByUserID,getDocPrescriptionByID,getManualPrescriptionByID,getOwnerdetailsByID,getDependDetailsByID,
+    getDependsByUserID,getDocPrescriptionByID,getManualPrescriptionByID,getOwnerdetailsByID,getDependDetailsByID,getClinics,getSpecializations,getDoctors,
 }

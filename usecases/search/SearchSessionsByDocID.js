@@ -1,8 +1,8 @@
 const pool = require("../../db");
 const querys = require("../../query/searchQueries");
 
-class SearchDoctor {
-    static async getDoctorById(id) {
+class searchSessionsByDocID {
+    static async SearchSessionDetailsByDocID(id) {
       try {
         const uid=parseInt(id);
 
@@ -10,7 +10,7 @@ class SearchDoctor {
             throw new Error('Invalid userId');
           }
 
-        const result = await pool.query(querys.getDoctorById,[uid]);
+        const result = await pool.query(querys.getSessionsById,[uid]);
         const user = result.rows;
         
         return user;
@@ -20,4 +20,4 @@ class SearchDoctor {
       }
     }
 }
-module.exports=SearchDoctor;
+module.exports=searchSessionsByDocID;

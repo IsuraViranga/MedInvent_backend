@@ -17,7 +17,7 @@ LEFT JOIN Remindermed ON Medicine.medid=Remindermed.medid
 LEFT JOIN Dependmember ON Prescription.relatedid=Dependmember.did
 WHERE Patientuser.userid='550e8400-e29b-41d4-a716-446655440000'
 ORDER BY Prescription.addTime DESC`;
-
+ 
 const getOwnerdetailsByID=`SELECT * FROM PatientUser WHERE userID=$1`;
 
 const getDependDetailsByID=`SELECT * FROM DependMember WHERE userID=$1 AND dID=$2`;

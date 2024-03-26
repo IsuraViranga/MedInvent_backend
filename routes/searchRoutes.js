@@ -14,9 +14,6 @@ router.get('/doctor/names',searchController.getAllDoctorNames);
 router.get('/doctor/specializations',searchController.getAllDoctorSpecializations);
 router.get('/sessions/details',searchController.getResultSessionDetails);
 
-
-
-
 //router.get('/pharmacy',searchController.searchPharmacy);
 //router.get('/medicine',searchController.searchMedicine);
 

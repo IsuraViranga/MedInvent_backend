@@ -21,7 +21,7 @@ const keycloakConfig2 ={
 class AddOwnerProfile {
   static async addNewOwner(newUser) {
     try {
-      const { user_password, email, first_name, last_name, nic, gender, weight, birth_date, height, mnumber } = newUser;
+      const { user_password, email, first_name, last_name, nic, gender, birth_date, mobileNo,picPath,lineOne,lineTwo,city,postalCode,distric } = newUser;
 
       // check mail exist
       const checkMailExist = await pool.query(querys.checkMailExist, [email]);
@@ -30,7 +30,7 @@ class AddOwnerProfile {
       }
 
       // Perform a query to add new user details to PostgreSQL
-      const result = await pool.query(querys.addOwner, [user_password, email, first_name, last_name, nic, gender, weight, birth_date, height, mnumber]);
+      const result = await pool.query(querys.addOwner, ["55ecfe7b-8f7a-4b47-9c9f-3f6e1db0c7f5",email, first_name, last_name, nic, gender, birth_date,mobileNo,picPath,lineOne,lineTwo,city,postalCode,distric]);
 
       // perform method to add username and password to Keycloak
       const keycloakresult = await this.createUser(email, user_password,first_name);

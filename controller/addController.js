@@ -25,7 +25,7 @@ class AddController {
           res.status(500).json({ error: 'Internal Server Error' });
         }
       }
-      static async addDependentProfile(req,res) {
+      static async addDependentProfile(req,res){
         try {
           const getbody = req.body;
           const userId = req.params.id;

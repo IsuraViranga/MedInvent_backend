@@ -1,8 +1,8 @@
-const checkMailExist = "SELECT EXISTS(SELECT 1 FROM temporary_user_data WHERE email = $1)";
+const checkMailExist = "SELECT EXISTS(SELECT 1 FROM PatientUser WHERE email = $1)";
 
 const checkNICExist="SELECT COUNT(*) FROM DependMember WHERE userID=$1 AND nic=$2 GROUP BY nic";
 
-const addOwner = "INSERT INTO temporary_user_data(user_password, email, first_name, last_name, nic, gender, weight, birth_date,height,mnumber) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)";
+const addOwner = "INSERT INTO PatientUser(userID,email,Fname, Lname, nic, gender, dob,mobileNo,picPath,lineOne,lineTwo,city,postalCode,distric) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)";
 
 const addDataToPrescriptiontableFormat_01="INSERT INTO Prescription(presType,presname,userID) VALUES($1,$2,$3) RETURNING presID";
 
@@ -18,7 +18,7 @@ const addReminderToTable=`INSERT INTO ReminderMed(medID,remTime)
 VALUES($1,$2)
 `;
 
-const addDepend = "INSERT INTO DependMember(userID,Fname,Lname,dob,relationship,gender,picPath,nic) VALUES($1,$2,$3,$4,$5,$6,$7,$8)";
+const addDepend = "INSERT INTO DependMember(userID,dID,Fname,Lname,dob,relationship,gender,picPath) VALUES($1,$2,$3,$4,$5,$6,$7,$8)";
 
 
 module.exports={

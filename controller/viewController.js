@@ -3,6 +3,7 @@
 //const searchDoctor = require("../usecases/view/getOwnerProfile");
 //const searchDoctor = require("../usecases/view/getDependProfile");
 //const searchDoctor = require("../usecases/view/getUpAppoinments");
+const GetPastAppoinments = require("../usecases/view/getPastAppoinments");
 const GetUserDepends = require("../usecases/view/getUsersDependDetails");
 const GetDocPrescription =require(".././usecases/view/getDocPrescription");
 const GetManualMyPrescription =require(".././usecases/view/getManualAddPrescription");
@@ -57,6 +58,16 @@ class ViewController {
         const {dID}=req.body;
         const DependDetails = await GetDependProfileDetails.getDependProfileDetailByID(userId,dID);
         res.status(200).json(DependDetails.rows);
+      } catch (error) {  
+        console.error('Error:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+    }
+    static async getPastAppoinments(req, res) {
+      try {
+        const userId = req.params.id;
+        const PastAppoinmentsDetails = await GetPastAppoinments.getPastAppoinmentsByID(userId);
+        res.status(200).json(getPastAppoinmentsDetails.rows);
       } catch (error) {  
         console.error('Error:', error.message);
         res.status(500).json({ error: 'Internal Server Error' });

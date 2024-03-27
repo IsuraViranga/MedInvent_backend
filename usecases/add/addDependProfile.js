@@ -16,8 +16,10 @@ class AddDependProfile {
       {
         throw new Error('NIC already exist in database');
       }*/
+      const uid=uuidv5(userId, uuidv5.DNS);
+      const dependId=uuidv5(dID, uuidv5.DNS);
     
-      result2= await pool.query(querys.addDepend,[uuidv5(userId, uuidv5.DNS),uuidv5(dID, uuidv5.DNS),Fname,Lname,dob,relationship,gender,picPath]);
+      result2= await pool.query(querys.addDepend,[uid,dependId,Fname,Lname,dob,relationship,gender,picPath]);
       if(result2.rowCount)
       {
         isSuccess=true;

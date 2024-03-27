@@ -2,7 +2,7 @@
 //const searchDoctor = require("../usecases/view/getOwnerPrescription");
 //const searchDoctor = require("../usecases/view/getOwnerProfile");
 //const searchDoctor = require("../usecases/view/getDependProfile");
-//const searchDoctor = require("../usecases/view/getUpAppoinments");
+const GetUpAppoinments = require("../usecases/view/getUpAppoinments");
 const GetPastAppoinments = require("../usecases/view/getPastAppoinments");
 const GetUserDepends = require("../usecases/view/getUsersDependDetails");
 const GetDocPrescription =require(".././usecases/view/getDocPrescription");
@@ -67,6 +67,16 @@ class ViewController {
       try {
         const userId = req.params.id;
         const PastAppoinmentsDetails = await GetPastAppoinments.getPastAppoinmentsByID(userId);
+        res.status(200).json(getPastAppoinmentsDetails.rows);
+      } catch (error) {  
+        console.error('Error:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+    }
+    static async getUpcomeAppoinments(req, res) {
+      try {
+        const userId = req.params.id;
+        const UpcomeAppoinmentsDetails = await GetUpAppoinments.getUpcomeAppoinmentsByID(userId);
         res.status(200).json(getPastAppoinmentsDetails.rows);
       } catch (error) {  
         console.error('Error:', error.message);

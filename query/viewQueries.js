@@ -28,6 +28,12 @@ const getDoctors="SELECT Fname,Lname FROM Doctor";
 
 const getSpecializations ="SELECT specialization FROM Doctor";
 
+const getUpcomeAppoinmentsByID=`SELECT A.appoinmentID,A.appoinmentType,A.appoinmentNo,A.dID,A.userID,A.docID,A.scheduleID,A.clinicID,A.madeTime,S.sessDate, S.staTime
+FROM Appoinment A
+INNER JOIN Sessions S ON A.scheduleID = S.scheduleID
+WHERE (S.sessDate < CURRENT_DATE) OR (S.sessDate = CURRENT_DATE AND S.staTime < CURRENT_TIME)
+ORDER BY S.sessDate DESC, S.staTime DESC;`
+
 const getPastAppoinmentsByID= `SELECT A.appoinmentID, A.appoinmentType, A.appoinmentNo, A.dID, A.userID, A.docID, A.scheduleID, A.clinicID, A.madeTime,S.sessDate, S.staTime,
 FROM Appoinment A
 INNER JOIN Sessions S ON A.scheduleID = S.scheduleID
@@ -35,5 +41,5 @@ WHERE (S.sessDate < CURRENT_DATE) OR (S.sessDate = CURRENT_DATE AND S.staTime < 
 ORDER BY S.sessDate DESC, S.staTime DESC; `
 
 module.exports={
-    getDependsByUserID,getDocPrescriptionByID,getManualPrescriptionByID,getOwnerdetailsByID,getDependDetailsByID,getClinics,getSpecializations,getDoctors,getPastAppoinmentsByID,
+    getDependsByUserID,getDocPrescriptionByID,getManualPrescriptionByID,getOwnerdetailsByID,getDependDetailsByID,getClinics,getSpecializations,getDoctors,getPastAppoinmentsByID,getUpcomeAppoinmentsByID,
 }
